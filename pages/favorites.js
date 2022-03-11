@@ -4,7 +4,7 @@ import Card from '../components/Card'
 import Layout from '../layouts/Layout'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function favorites() {
     return (
         <Layout>
             <div className='flex flex-col mx-auto max-w-3xl'>

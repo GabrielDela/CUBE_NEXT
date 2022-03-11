@@ -1,6 +1,6 @@
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
-export default function Friend() {
+export default function Relation() {
     return (
         <div className='px-4 mb-4 flex justify-between bg-white py-4 rounded-full'>
             <div className='flex w-full'>

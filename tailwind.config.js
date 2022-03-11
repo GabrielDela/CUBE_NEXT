@@ -9,7 +9,11 @@ module.exports = {
       colors: {
         'purple-cube': '#441A47',
       },
+      rotate: {
+        '360': '360deg',
+      }
     },
   },
   plugins: [],
+  darkMode: 'class',
 }

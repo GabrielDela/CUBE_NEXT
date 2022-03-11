@@ -15,10 +15,6 @@ a {
   box-sizing: border-box;
 } */
 
-*{
-  transition: 0.1s;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,4 +38,17 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image {
+  position: relative !important;
+  object-fit: cover; 
+}
+
+.moving-component{
+  transition: 0.7s;
 }

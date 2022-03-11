@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image'
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 export default function Layout({ children }) {
@@ -17,15 +18,21 @@ export default function Layout({ children }) {
                         <div className='w-full h-40 bg-gray-800 mb-8 py-4 px-2'>
                             <div className='flex flex-col h-full justify-center'>
                                 <div className='flex'>
-                                    <img src="../img/background-login.jpg" className='w-14 h-14 rounded-full hover:opacity-70 cursor-pointer' />
+                                    <div className='image-container h-14 w-14'>
+                                        <Image src="/img/background-login.jpg" layout="fill" className='rounded-full hover:opacity-70 cursor-pointer image' />
+                                    </div>
+                                    {/* <Image width={45}  height={45} src="/img/background-login.jpg" className='rounded-full hover:opacity-70 cursor-pointer' /> */}
                                     <div className='hidden md:block'>
-                                        <p className='px-4 hidden md:block whitespace-nowrap'>Gabriel DELAHAYE</p>
-                                        <p className='px-4 hidden md:block whitespace-nowrapwhitespace-nowrap text-xs text-gray-300'>@GabrielDela</p>
+                                        <Link href={"/profile"}>
+                                            <p className='px-4 hidden md:block whitespace-nowrap cursor-pointer hover:underline hover:text-grey transition'>Gabriel DELAHAYE</p>
+                                        </Link>
+                                        <Link href={"/profile"}>
+                                            <p className='px-4 hidden md:block whitespace-nowrapwhitespace-nowrap text-xs text-gray-300 cursor-pointer hover:underline hover:text-grey transition'>@GabrielDela</p>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className='hidden md:flex w-full justify-between px-2 mt-4 text-xs text-gray-300 whitespace-nowrap'>
                                     <p className='hover:text-gray-100 cursor-pointer'>104 relations</p>
-                                    <p className='hover:text-gray-100 cursor-pointer'>14 amis</p>
                                 </div>
                             </div>
                         </div>
@@ -42,19 +49,19 @@ export default function Layout({ children }) {
                                     <div className='w-full my-auto text-base tracking-widest hidden md:block my-auto whitespace-nowrap'>Favoris</div>
                                 </div>
                             </Link>
-                            <Link href="/friends">
+                            <Link href="/relations">
                                 <div className="flex cursor-pointer text-xl mb-12 hover:text-gray-400">
                                     <i className="my-auto mx-6 w-full text-center md:w-6 fa fa-users"></i>
                                     <div className='w-full my-auto text-base tracking-widest hidden md:block my-auto whitespace-nowrap'>Amis</div>
                                 </div>
                             </Link>
-                            <Link href="/test">
+                            <Link href="/resources">
                                 <div className="flex cursor-pointer text-xl mb-12 hover:text-gray-400">
                                     <i className="my-auto mx-6 w-full text-center md:w-6 fa fa-plus-square"></i>
                                     <div className='w-full my-auto text-base tracking-widest hidden md:block my-auto whitespace-nowrap'>Ressources</div>
                                 </div>
                             </Link>
-                            <Link href="/test">
+                            <Link href="/profile">
                                 <div className="flex cursor-pointer text-xl mb-12 hover:text-gray-400">
                                     <i className="my-auto mx-6 w-full text-center md:w-6 fa fa-user"></i>
                                     <div className='w-full my-auto text-base tracking-widest hidden md:block my-auto whitespace-nowrap'>Profil</div>
@@ -63,7 +70,7 @@ export default function Layout({ children }) {
 
                         </div>
                         <div className='mt-auto'>
-                            <Link href="/test">
+                            <Link href="/parameters">
                                 <div className="flex cursor-pointer text-2xl mb-8 hover:text-gray-400">
                                     <i className="my-auto mx-6 w-full text-center md:w-6 fa fa-gear"></i>
                                     <div className='w-full my-auto text-base tracking-widest hidden md:block my-auto whitespace-nowrap'>Paramètres</div>
