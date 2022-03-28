@@ -3,8 +3,18 @@ import Image from 'next/image'
 import Card from '../components/Card'
 import Layout from '../layouts/Layout'
 import styles from '../styles/Home.module.css'
+import { getFavorite } from '../utils/resource.service';
 
 export default function favorites() {
+    let user = {}
+    let listfavorite = {}
+    if(typeof window !== 'undefined'){
+        user = JSON.parse(window.localStorage.getItem("user"));
+        if(user.favorites != undefined){
+            listfavorite = getFavorite(user.favorites)
+        }
+    }
+    
     return (
         <Layout>
             <div className='flex flex-col mx-auto max-w-3xl'>

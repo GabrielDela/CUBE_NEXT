@@ -2,8 +2,15 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image'
 import '../node_modules/font-awesome/css/font-awesome.min.css';
+import { useState, useEffect } from 'react';
 
 export default function Layout({ children }) {
+    let user = null;
+
+    if(typeof window !== 'undefined'){
+        user = JSON.parse(window.localStorage.getItem("user"));
+    }
+
     return (
         <div>
             <Head>
@@ -24,10 +31,10 @@ export default function Layout({ children }) {
                                     {/* <Image width={45}  height={45} src="/img/background-login.jpg" className='rounded-full hover:opacity-70 cursor-pointer' /> */}
                                     <div className='hidden md:block'>
                                         <Link href={"/profile"}>
-                                            <p className='px-4 hidden md:block whitespace-nowrap cursor-pointer hover:underline hover:text-grey transition'>Gabriel DELAHAYE</p>
+                                            <p className='px-4 hidden md:block whitespace-nowrap cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.firstname + " " + user.lastname : ''}</p>
                                         </Link>
                                         <Link href={"/profile"}>
-                                            <p className='px-4 hidden md:block whitespace-nowrapwhitespace-nowrap text-xs text-gray-300 cursor-pointer hover:underline hover:text-grey transition'>@GabrielDela</p>
+                                            <p className='px-4 hidden md:block whitespace-nowrapwhitespace-nowrap text-xs text-gray-300 cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.tag : ''}</p>
                                         </Link>
                                     </div>
                                 </div>

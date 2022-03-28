@@ -40,7 +40,6 @@ export default function resources() {
 //     var resources = [];
 
 //     // var response = await axios.get('http://localhost:5000/api/resources');
-//     // console.log('http://localhost:5000/api/resources/' + id);
 //     // var data = response.data;
     
     

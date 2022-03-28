@@ -1,10 +1,35 @@
 import Image from 'next/image'
-import Card from '../../components/Card'
 import Layout from '../../layouts/Layout'
-import Link from 'next/link'
+import { isAuth, me } from '../../../utils/auth.service.js';
+import { getUserResources, test } from '../../../utils/resource.service.js';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function favorites({ user }) {
-    console.log(user);
+export default function profile({ userProps, resourcesData }) {
+    let [resources, setResources] = useState(resourcesData);
+    let [userData, setUserData] = useState(userProps);
+    let [isMe, setIsMe] = useState(false);
+
+    // useEffect(async () => {
+    //     const token = window.localStorage.getItem('token');
+    //     isAuth(token);
+    //     let response = await me(token);
+    //     let user = response.data.user;
+
+    //     console.log(userData);
+    //     console.log(user);
+
+    //     if (userData != null && userData._id === user._id) {
+    //         setIsMe(true);
+    //     }
+    //     else if(userData == null) {
+    //         setIsMe(true);
+    //     }
+
+    //     response = await getUserResources(user._id);
+    //     setResources(response.data.resources);
+    // }, []);
+
     return (
         <Layout>
             <div className="flex flex-col mx-auto max-w-3xl">
@@ -19,9 +44,9 @@ export default function favorites({ user }) {
                         <div>
                             <div className='w-0 mb-auto mx-2 w-fit'>
                                 <div className="flex">
-                                    <p className='my-auto px-4 whitespace-nowrap text-xl cursor-pointer'>Gabriel DELAHAYE</p>
+                                    <p className='my-auto px-4 whitespace-nowrap text-xl cursor-pointer'>user</p>
                                 </div>
-                                <p className='px-4 whitespace-nowrap text-gray-500'>@GabrielDela</p>
+                                <p className='px-4 whitespace-nowrap text-gray-500'>@GabrielDela - {isMe ? 'yes' : 'no'}</p>
                                 <p className='px-4 whitespace-nowrap text-gray-500'>104 amis</p>
                             </div>
                         </div>
@@ -51,12 +76,25 @@ export default function favorites({ user }) {
     )
 }
 
-export async function getServerSideProps(req) {
-    var id = req.params.id;
+// getServer
+// export async function getServerSideProps(req) {
+    // // get id in params
+    // const id = req.query.id;
 
-    return {
-        props: {
-            user: id
-        }
-    };
-}
+    // let user = null;
+    // let resources = null;
+    // if (id) {
+    //     const responseUser = await axios.get(`http://localhost:5000/api/users/${id}`);
+    //     user = responseUser.data;
+
+    //     const responseRessources = await axios.get(`http://localhost:5000/api/resources/user?user_id=${id}`);
+    //     resources = responseRessources.data;
+    // }
+
+    // return {
+    //     props: {
+    //         userProps: user,
+    //         resourcesData: resources
+    //     }
+    // }
+// }

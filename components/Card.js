@@ -5,6 +5,9 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import Link from "next/link";
 import Image from 'next/image';
+import {getUser} from '../utils/user.service.js'
+
+import {addFavorite} from '../utils/resource.service.js'
 
 // const resourceSchema = mongoose.Schema({
 //     _id
@@ -19,9 +22,13 @@ import Image from 'next/image';
 // });
 
 export default function Card({data}) {
-    
+    console.log(data);
     if(data != null){
         var date = data.created_at != null ? new Date(data.created_at) : new Date('2020-01-01');
+        
+        var user = getUser(data.user_id).then(user => {
+            return user;
+        });
     }
     else{
         var date = new Date('2020-01-01');
@@ -37,9 +44,12 @@ export default function Card({data}) {
                 <div className='image-container relative w-full h-72'>
                     <Image src="/img/background-login.jpg" layout="fill" className='rounded-lg object-cover image' />
                     <div className='moving-component relative flex ml-auto mr-4 mt-4 w-12 h-12 bg-white rounded-full text-center hover:bg-gray-200 hover:rotate-360 transition hover:transform-gpu cursor-pointer'>
+                        <button onClick={() => { addFavorite(user.id, data.id) }}>
+
                         <div className='w-full my-auto text-center text-xl text-purple-500'>
                             <i className="fa fa-heart" aria-hidden="true"></i> 
                         </div>
+                        </button>
                     </div>
                 </div>
                 <div className='m-4 lg:mx-8'>
@@ -52,9 +62,9 @@ export default function Card({data}) {
                         <div>
                             <div className='w-0 mb-auto mx-2 w-fit'>
                                 <div className="flex">
-                                    <p className='my-auto px-4 whitespace-nowrap cursor-pointer hover:underline hover:text-grey transition'>Gabriel DELAHAYE</p>
+                                    <p className='my-auto px-4 whitespace-nowrap cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.firstname + " " + user.lastname : ''}</p>
                                 </div>
-                                <p className='px-4 whitespace-nowrap text-xs text-gray-500 cursor-pointer hover:underline hover:text-grey transition'>@GabrielDela</p>
+                                <p className='px-4 whitespace-nowrap text-xs text-gray-500 cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.tag : ''}</p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +74,7 @@ export default function Card({data}) {
                     <div className='flex pt-6'>
                         <p className='text-lg font-medium tracking-widest mr-auto text-xs font-semibold mt-auto'>{formatedDate}</p>
                         <Link href={"/resources/" + (data != null ? data._id : null)}>
-                            <p className="text-lg font-medium tracking-widest ml-auto text-xs font-semibold mt-auto hover:underline hover:text-purple-cube transition cursor-pointer">> Voir plus</p>
+                            <p className="text-lg font-medium tracking-widest ml-auto text-xs font-semibold mt-auto hover:underline hover:text-purple-cube transition cursor-pointer">&gt; Voir plus</p>
                         </Link>
                     </div>
                 </div>
@@ -72,13 +82,13 @@ export default function Card({data}) {
                 <hr className="mt-2"/>
                 <div className="flex justify-around m-5">
                     <div className="flex">
-                        <p>5</p> <MessageOutlinedIcon className="mx-2"></MessageOutlinedIcon>
+                        <p>{data != null ? data._id : 0}</p> <MessageOutlinedIcon className="mx-2"></MessageOutlinedIcon>
                     </div>
                     <div className="flex">
-                        <p>10</p> <ShareOutlinedIcon className="mx-2"></ShareOutlinedIcon>
+                        <p>{data != null ? data.share : 0}</p> <ShareOutlinedIcon className="mx-2"></ShareOutlinedIcon>
                     </div>
                     <div className="flex">
-                        <p>128</p> <ThumbUpOutlinedIcon className="mx-2"></ThumbUpOutlinedIcon>
+                        <p>{data != null ? data.like : 0}</p> <ThumbUpOutlinedIcon className="mx-2"></ThumbUpOutlinedIcon>
                     </div>
                 </div>
             </div>

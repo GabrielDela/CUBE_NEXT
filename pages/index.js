@@ -2,11 +2,24 @@
 import Image from 'next/image';
 import Card from '../components/Card';
 import Layout from '../layouts/Layout';
-import { useState } from 'react';
 import axios from 'axios';
-export default function Home({resources}) {
+import { isAuth, auth, logout } from '../utils/auth.service.js';
+import { useEffect, useReducer, createContext, useContext, useMemo, useState } from "react";
+import { getAllResources } from '../utils/resource.service';
 
-  var [resources, setResources] = useState(resources);
+export default function Home({ resourcesData }) {
+
+  // var [resources, setResources] = useState(resourcesData);
+
+  // console.log(resources);
+  // resources.map((resource) => {
+  //   console.log(resource)
+  // })
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    isAuth(token);
+  }, []);
 
   return (
     <Layout >
@@ -15,26 +28,24 @@ export default function Home({resources}) {
           Accueil
         </div>
         {
-          resources.map((resource) => {
-            return <Card key={resource._id} data={resource}></Card>;
+          resourcesData.map((resource) => {
+            return <Card key={resource._id} data={resource}></Card>
           })
         }
       </div>
+      
     </Layout>
   )
 }
 
 export async function getServerSideProps(req) {
 
-  var resources = [];
-  
-  var response = await axios.get('http://localhost:5000/api/resources');
-  resources = response.data;
+  let resources =  await getAllResources();
 
   return {
-      props: {
-          resources: resources
-      }
+    props: {
+      resourcesData: resources
+    }
   };
 }
 
