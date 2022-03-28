@@ -11,11 +11,11 @@ export default function favorites() {
                 <div className='text-xl font-semibold tracking-widest py-8 px-4'>
                     Favoris
                 </div>
+                {/* <Card></Card>
                 <Card></Card>
                 <Card></Card>
                 <Card></Card>
-                <Card></Card>
-                <Card></Card>
+                <Card></Card> */}
             </div>
         </Layout>
     )

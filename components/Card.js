@@ -3,21 +3,42 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-import Link from "next/link"
-import Image from 'next/image'
+import Link from "next/link";
+import Image from 'next/image';
 
+// const resourceSchema = mongoose.Schema({
+//     _id
+//     title: { type: String, required: true },
+//     description: { type: String, require: true },
+//     X content: { type: JSON, require: true },
+//     user_id: { type: Number, require: true },
+//     desactivated: { type: Boolean, required: true },
+//     deleted: { type: Boolean, required: true },
+//     created_at: { type: Date, required: true },
+//     updated_at: { type: Date, required: true },
+// });
 
-export default function Card() {
+export default function Card({data}) {
+    
+    if(data != null){
+        var date = data.created_at != null ? new Date(data.created_at) : new Date('2020-01-01');
+    }
+    else{
+        var date = new Date('2020-01-01');
+    }
+    
+    var formatedDay = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    var formatedMonth = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
+    var formatedDate = formatedDay + "/" + formatedMonth + "/" + date.getFullYear();
+
     return (
-
         <div className='w-full'>
             <div className='flex flex-col bg-white w-full sm:max-w-xl lg:max-w-3xl mx-auto rounded-lg shadow-2xl my-4'>
                 <div className='image-container relative w-full h-72'>
                     <Image src="/img/background-login.jpg" layout="fill" className='rounded-lg object-cover image' />
                     <div className='moving-component relative flex ml-auto mr-4 mt-4 w-12 h-12 bg-white rounded-full text-center hover:bg-gray-200 hover:rotate-360 transition hover:transform-gpu cursor-pointer'>
                         <div className='w-full my-auto text-center text-xl text-purple-500'>
-                            {/* <i class="fa fa-heart-o" aria-hidden="true"></i> */}
-                            <i class="fa fa-heart" aria-hidden="true"></i> 
+                            <i className="fa fa-heart" aria-hidden="true"></i> 
                         </div>
                     </div>
                 </div>
@@ -37,11 +58,12 @@ export default function Card() {
                             </div>
                         </div>
                     </div>
-                    <p className='text-base tracking-widest  mt-4'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                    <p className='text-base tracking-widest  mt-4'>
+                        {data != null ? data.description : 'Lorem ipsum dolor si amet'}
+                    </p>
                     <div className='flex pt-6'>
-                        <p className='text-lg font-medium tracking-widest mr-auto text-xs font-semibold mt-auto'>10/05/2022</p>
-                        <Link href={"/"}>
+                        <p className='text-lg font-medium tracking-widest mr-auto text-xs font-semibold mt-auto'>{formatedDate}</p>
+                        <Link href={"/resources/" + (data != null ? data._id : null)}>
                             <p className="text-lg font-medium tracking-widest ml-auto text-xs font-semibold mt-auto hover:underline hover:text-purple-cube transition cursor-pointer">> Voir plus</p>
                         </Link>
                     </div>
@@ -61,6 +83,5 @@ export default function Card() {
                 </div>
             </div>
         </div>
-
     )
 }

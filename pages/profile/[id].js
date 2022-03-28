@@ -1,10 +1,10 @@
 import Image from 'next/image'
-import Card from '../components/Card'
-import Layout from '../layouts/Layout'
-import styles from '../styles/Home.module.css'
+import Card from '../../components/Card'
+import Layout from '../../layouts/Layout'
 import Link from 'next/link'
 
-export default function favorites() {
+export default function favorites({ user }) {
+    console.log(user);
     return (
         <Layout>
             <div className="flex flex-col mx-auto max-w-3xl">
@@ -49,4 +49,14 @@ export default function favorites() {
             {/* <Card></Card> */}
         </Layout>
     )
+}
+
+export async function getServerSideProps(req) {
+    var id = req.params.id;
+
+    return {
+        props: {
+            user: id
+        }
+    };
 }

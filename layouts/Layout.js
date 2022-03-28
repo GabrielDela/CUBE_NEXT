@@ -15,7 +15,7 @@ export default function Layout({ children }) {
                 <div className="h-screen bg-purple-cube text-white pb-6 min-w-30 w-30 md:w-80 shadow-3xl">
                     <div className="flex flex-col w-full h-full">
                         {/* <p className='font-bold text-center text-xl tracking-widest py-4 pb-12'>CUBE</p> */}
-                        <div className='w-full h-40 bg-gray-800 mb-8 py-4 px-2'>
+                        <div className='w-full h-40 bg-gray-900 mb-8 py-4 px-2'>
                             <div className='flex flex-col h-full justify-center'>
                                 <div className='flex'>
                                     <div className='image-container h-14 w-14'>
@@ -39,7 +39,7 @@ export default function Layout({ children }) {
                         <div className="flex flex-col">
                             <Link href="/">
                                 <div className="flex cursor-pointer text-xl mb-12 hover:text-gray-400">
-                                    <i class="my-auto mx-6 w-full text-center md:w-6 fa fa-hashtag" aria-hidden="true"></i>
+                                    <i className="my-auto mx-6 w-full text-center md:w-6 fa fa-hashtag" aria-hidden="true"></i>
                                     <div className='w-full my-auto text-base tracking-widest hidden md:block my-auto whitespace-nowrap'>Fil d'actualité</div>
                                 </div>
                             </Link>

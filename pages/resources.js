@@ -21,6 +21,7 @@ export default function resources() {
                     
                 </div>
 
+                {/* <Card></Card>
                 <Card></Card>
                 <Card></Card>
                 <Card></Card>
@@ -28,9 +29,24 @@ export default function resources() {
                 <Card></Card>
                 <Card></Card>
                 <Card></Card>
-                <Card></Card>
-                <Card></Card>
+                <Card></Card> */}
             </div>
         </Layout>
     )
 }
+
+// export async function getServerSideProps(req) {
+//     var id = req.params.id;
+//     var resources = [];
+
+//     // var response = await axios.get('http://localhost:5000/api/resources');
+//     // console.log('http://localhost:5000/api/resources/' + id);
+//     // var data = response.data;
+    
+    
+//     return {
+//         props: {
+//             resource: data
+//         }
+//     };
+// }
