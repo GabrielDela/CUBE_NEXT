@@ -64,7 +64,7 @@ export default function profile() {
                 {
                     resources.map((resource, index) => {
                         return (
-                            <Card key={index} resource={resource} />
+                            <Card key={index} data={resource} />
                         )
                     })
                 }
