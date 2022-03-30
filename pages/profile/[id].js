@@ -1,35 +1,30 @@
 import Image from 'next/image'
 import Layout from '../../layouts/Layout'
-import { isAuth, me } from '../../../utils/auth.service.js';
-import { getUserResources, test } from '../../../utils/resource.service.js';
+import { me } from '../../utils/auth.service.js';
+import { getUserResources } from '../../utils/resource.service.js';
+import { getUser } from '../../utils/user.service.js';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Card from '../../components/Card'
 
-export default function profile({ userProps, resourcesData }) {
-    let [resources, setResources] = useState(resourcesData);
-    let [userData, setUserData] = useState(userProps);
-    let [isMe, setIsMe] = useState(false);
 
-    // useEffect(async () => {
-    //     const token = window.localStorage.getItem('token');
-    //     isAuth(token);
-    //     let response = await me(token);
-    //     let user = response.data.user;
+export default function profile({userId}) {
+    let [resources, setResources] = useState([]);
+    let [userData, setUserData] = useState(null);
 
-    //     if (userData != null && userData._id === user._id) {
-    //         setIsMe(true);
-    //     }
-    //     else if(userData == null) {
-    //         setIsMe(true);
-    //     }
-
-    //     response = await getUserResources(user._id);
-    //     setResources(response.data.resources);
-    // }, []);
-
-    useEffect(() => {
+    //a faire dans un getServerSideProps
+    useEffect(async () => {
         const token = window.localStorage.getItem('token');
         me(token);
+
+        let user = null;
+        if (typeof window !== 'undefined') {
+            user = await getUser(userId)
+        }
+        setUserData(user);
+
+        var response = await getUserResources(user._id);
+        setResources(response);
     }, []);
 
     return (
@@ -46,10 +41,10 @@ export default function profile({ userProps, resourcesData }) {
                         <div>
                             <div className='w-0 mb-auto mx-2 w-fit'>
                                 <div className="flex">
-                                    <p className='my-auto px-4 whitespace-nowrap text-xl cursor-pointer'>user</p>
+                                    <p className='my-auto px-4 whitespace-nowrap text-xl cursor-pointer'>{ userData != null ? userData.firstname + " " + userData.lastname : '' }</p> 
                                 </div>
-                                <p className='px-4 whitespace-nowrap text-gray-500'>@GabrielDela - {isMe ? 'yes' : 'no'}</p>
-                                <p className='px-4 whitespace-nowrap text-gray-500'>104 amis</p>
+                                <p className='px-4 whitespace-nowrap text-gray-500'>{ userData != null ? userData.tag : '' }</p>
+                                <p className='px-4 whitespace-nowrap text-gray-500'>22 amis</p>
                             </div>
                         </div>
                     </div>
@@ -73,14 +68,21 @@ export default function profile({ userProps, resourcesData }) {
 
 
             </div>
-            {/* <Card></Card> */}
+            {
+                resources.map((resource) => {
+                    console.log(resource);  
+                    return (
+                        <Card key={resource._id} resource={resource} />
+                    )
+                })
+            }
         </Layout>
     )
 }
 
 // getServer
-// export async function getServerSideProps(req) {
-    // // get id in params
+export async function getServerSideProps(req) {
+    // get id in params
     // const id = req.query.id;
 
     // let user = null;
@@ -93,10 +95,14 @@ export default function profile({ userProps, resourcesData }) {
     //     resources = responseRessources.data;
     // }
 
-    // return {
-    //     props: {
-    //         userProps: user,
-    //         resourcesData: resources
-    //     }
-    // }
-// }
+
+    // let user = await getUser(userId)
+    // let resource = await getUserResources(user._id); 
+
+    return {
+        props :
+        {
+            userId: req.query.id
+        } 
+    }
+}

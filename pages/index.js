@@ -24,7 +24,7 @@ export default function Home({ resourcesData }) {
   return (
     <Layout >
       <div className='flex flex-col mx-auto max-w-3xl'>
-        <div className='flex justify-between px-5 pt-4 '>
+        <div className='flex justify-between px-5 pt-5 '>
           <div className='text-xl font-semibold tracking-widest my-auto'>
             Accueil
           </div>

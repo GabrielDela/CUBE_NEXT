@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css'
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import Relation from '../components/relation';
 import {useEffect } from "react";
+import { me } from '../utils/auth.service';
 
 export default function relations() {
   
@@ -17,8 +18,11 @@ export default function relations() {
   return (
     <Layout>
       <div className='flex flex-col mx-auto max-w-3xl'>
-        <div className='text-xl font-semibold tracking-widest py-8 px-4'>
-          Liste d'amis (tkt il y en a 2/3 seulement)
+        <div className='flex justify-between p-5'>
+          <div className='text-xl font-semibold tracking-widest my-auto'>
+          Liste d'amis
+          </div>
+          <Image src="/img/logo.png" width='50px' height='50px'></Image>
         </div>
         <Relation></Relation>
         <Relation></Relation>

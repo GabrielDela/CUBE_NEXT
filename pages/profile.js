@@ -51,21 +51,13 @@ export default function profile() {
                             </div>
                         </div>
                     </div>
-                    <button onClick={() => logout()}>
-                        <div className='flex'>
-                            <div className='flex ml-auto w-12 h-12 bg-white rounded-full text-center hover:bg-gray-200 transition cursor-pointer'>
-                                <div className='w-full ml-auto my-auto text-center text-xl text-purple-500'>
-                                    <RocketLaunchIcon className='mb-1'/>
-                                </div>
+                    <div className='flex' onClick={() => logout()}>
+                        <div className='flex ml-auto w-12 h-12 bg-white rounded-full text-center hover:bg-gray-200 transition cursor-pointer'>
+                            <div className='w-full ml-auto my-auto text-center text-xl text-purple-500'>
+                                <RocketLaunchIcon className='mb-1'/>
                             </div>
                         </div>
-                    </button>
-                    {/* <div className='absolute top-6 flex w-12 h-12 bg-white rounded-full text-center hover:bg-gray-200 hover:rotate-360 transition cursor-pointer'>
-                        <div className='w-full ml-auto my-auto text-center text-xl text-purple-500'>
-                           
-                            <i className="fa fa-user-plus" aria-hidden="true"></i>
-                        </div>
-                    </div> */}
+                    </div>
 
                 </div>
                 

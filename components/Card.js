@@ -24,6 +24,8 @@ export default function Card({ data }) {
             user = await getUser(data.user_id);
             setUser(user);
 
+            console.log("user", user);
+            
             let count = await getNbComments(data._id);
             setNbComment(count);
 
@@ -87,12 +89,14 @@ export default function Card({ data }) {
                             </div>
                         </div>
                         <div>
-                            <div className='w-0 mb-auto mx-2 w-fit'>
-                                <div className="flex">
-                                    <p className='my-auto px-4 whitespace-nowrap cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.firstname + " " + user.lastname : ''}</p>
+                            <Link href={"/profile/" + (user != null ? user._id : null)}>
+                                <div className='w-0 mb-auto mx-2 w-fit'>
+                                    <div className="flex">
+                                        <p className='my-auto px-4 whitespace-nowrap cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.firstname + " " + user.lastname : ''}</p>
+                                    </div>
+                                    <p className='px-4 whitespace-nowrap text-xs text-gray-500 cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.tag : ''}</p>
                                 </div>
-                                <p className='px-4 whitespace-nowrap text-xs text-gray-500 cursor-pointer hover:underline hover:text-grey transition'>{user != null ? user.tag : ''}</p>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <p className='text-base tracking-widest  mt-4'>
