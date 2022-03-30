@@ -1,7 +1,15 @@
 import react from "react"
 import Link from "next/link"
+import { useEffect } from "react";
+import { isAuth, auth, me } from '../utils/auth.service.js';
 
 export default function register() {
+  
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    me(token);
+  }, []);
+
   return (
     <div className={"flex h-full w-full"}>
       <div className="flex flex-col bg-purple-cube h-screen w-full md:w-1/2 lg:w-1/3 justify-center px-10">

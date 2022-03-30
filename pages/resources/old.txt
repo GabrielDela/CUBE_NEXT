@@ -286,8 +286,6 @@
 //     temp.contents.push(content);
 
 //     setResource(temp);
-
-//     console.log(resource)
 // }
 
 import React, {Fragment, useState} from 'react';

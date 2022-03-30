@@ -3,29 +3,32 @@ import Image from 'next/image';
 import Card from '../components/Card';
 import Layout from '../layouts/Layout';
 import axios from 'axios';
-import { isAuth, auth, logout } from '../utils/auth.service.js';
+import { isAuth, auth, logout, me } from '../utils/auth.service.js';
 import { useEffect, useReducer, createContext, useContext, useMemo, useState } from "react";
 import { getAllResources } from '../utils/resource.service';
 
 export default function Home({ resourcesData }) {
-
-  // var [resources, setResources] = useState(resourcesData);
-
-  // console.log(resources);
-  // resources.map((resource) => {
-  //   console.log(resource)
-  // })
+  let [user , setUser] = useState(null);
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');
-    isAuth(token);
+    me(token);
+
+    let user = null;
+    if (typeof window !== 'undefined') {
+      user = JSON.parse(window.localStorage.getItem("user"));
+    }
+    setUser(user);
   }, []);
 
   return (
     <Layout >
       <div className='flex flex-col mx-auto max-w-3xl'>
-        <div className='text-xl font-semibold tracking-widest py-8 px-4'>
-          Accueil
+        <div className='flex justify-between px-5 pt-4 '>
+          <div className='text-xl font-semibold tracking-widest my-auto'>
+            Accueil
+          </div>
+          <Image src="/img/logo.png" width='50px' height='50px'></Image>
         </div>
         {
           resourcesData.map((resource) => {
@@ -33,14 +36,14 @@ export default function Home({ resourcesData }) {
           })
         }
       </div>
-      
+
     </Layout>
   )
 }
 
 export async function getServerSideProps(req) {
 
-  let resources =  await getAllResources();
+  let resources = await getAllResources();
 
   return {
     props: {

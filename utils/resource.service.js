@@ -10,26 +10,43 @@ async function getUserResources(user_id) {
   return response.data;
 }
 
-async function getAllResources(){
+async function getAllResources() {
   let response = await axios.get(BASE_URL + 'resources');
   return response.data;
 }
 
-async function getResource(id){
+async function getResource(id) {
   let response = await axios.get(BASE_URL + 'resources/' + id);
   return response.data;
 }
 
-async function getFavorite(listFavorites){
+async function getResourceList(ressourceList) {
+  let response = await axios.post(BASE_URL + 'resources/list', ressourceList);
+  return response.data;
+}
+
+async function getFavorite(listFavorites) {
   let listResources = [];
   listFavorites.map(async (e) => {
     let response = await getResource(e);
     listResources.push(response);
   })
+  return listResources;
 }
 
-async function addFavorite(userId, favoriteId){
-  let response = await axios.put(BASE_URL + 'users/' + userId + "/Favorites",{id:favoriteId});
+async function addFavorite(userId, resourceId) {
+  let response = await axios.post(BASE_URL + 'users/' + userId + "/favorites/" + resourceId);
   return response.data;
 }
-export { getUserResources, getAllResources, getResource, getFavorite, addFavorite };
+
+async function removeFavorite(userId, resourceId) {
+  let response = await axios.delete(BASE_URL + 'users/' + userId + "/favorites/" + resourceId);
+  return response.data;
+}
+
+async function getNbComments(resourceId) {
+  let response = await axios.get(BASE_URL + 'resources/comments/count/' + resourceId);
+  return response.data;
+}
+
+export { getUserResources, getAllResources, getResource, getResourceList, getFavorite, addFavorite, getNbComments, removeFavorite };

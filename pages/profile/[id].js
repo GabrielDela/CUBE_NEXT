@@ -16,9 +16,6 @@ export default function profile({ userProps, resourcesData }) {
     //     let response = await me(token);
     //     let user = response.data.user;
 
-    //     console.log(userData);
-    //     console.log(user);
-
     //     if (userData != null && userData._id === user._id) {
     //         setIsMe(true);
     //     }
@@ -29,6 +26,11 @@ export default function profile({ userProps, resourcesData }) {
     //     response = await getUserResources(user._id);
     //     setResources(response.data.resources);
     // }, []);
+
+    useEffect(() => {
+        const token = window.localStorage.getItem('token');
+        me(token);
+    }, []);
 
     return (
         <Layout>

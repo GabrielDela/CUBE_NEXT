@@ -6,9 +6,7 @@ const BASE_URL = URL;
 
 // get user resources
 async function getUser(user_id) {
-  console.log(BASE_URL + "user/" + user_id);
-  let response = await axios.get(BASE_URL + "user/" + user_id);
-  console.log(response);
+  let response = await axios.get(BASE_URL + "users/" + user_id);
   return response.data;
 }
 

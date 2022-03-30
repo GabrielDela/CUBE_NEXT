@@ -1,7 +1,7 @@
 import react from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { isAuth, auth } from '../../utils/auth.service.js';
+import { isAuth, auth, me } from '../utils/auth.service.js';
 
 export default function login() {
   var [email, setEmail] = react.useState("");
@@ -9,7 +9,7 @@ export default function login() {
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');
-    isAuth(token);
+    me(token);
   }, []);
 
   return (

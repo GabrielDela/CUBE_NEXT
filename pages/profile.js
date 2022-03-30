@@ -1,24 +1,33 @@
 import Image from 'next/image'
 import Layout from '../layouts/Layout'
-import { isAuth, me, logout } from '../../utils/auth.service.js';
-import { getUserResources, test } from '../../utils/resource.service.js';
+import { isAuth, me, logout } from '../utils/auth.service.js';
+import { getUserResources } from '../utils/resource.service.js';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import Card from '../components/Card'
+
 
 export default function profile() {
-    let [resources, setResources] = useState([]);
-    let [user, setUser] = useState(null);
+    let [resources, setResources] = useState([])
+    let [user, setUser] = useState(null)
+    // let user = null;
+    // if (typeof window !== 'undefined') {
+    //     user = JSON.parse(window.localStorage.getItem("user"));
+    // }
 
     useEffect(async () => {
         const token = window.localStorage.getItem('token');
-        isAuth(token);
+        me(token);
 
-        let response = await me(token);
-        let user = response.data.user.user;
+        let user = null;
+        if (typeof window !== 'undefined') {
+            user = JSON.parse(window.localStorage.getItem("user"));
+        }
         setUser(user);
-        response = await getUserResources(user._id);
-        setResources(response.data.resources != null ? response.data.resources : []);
+
+        var response = await axios.get('http://localhost:5000/api/resources/user/' + user._id);
+        setResources(response.data)
     }, []);
     
     return (
@@ -59,15 +68,15 @@ export default function profile() {
                     </div> */}
 
                 </div>
-
-
+                
+                {
+                    resources.map((resource, index) => {
+                        return (
+                            <Card key={index} resource={resource} />
+                        )
+                    })
+                }
             </div>
-            {
-                resources.map((resource) => {
-                    return <Card key={resource._id} data={resource}></Card>;
-                })
-            }
-            {/* <Card></Card> */}
         </Layout>
     )
 }

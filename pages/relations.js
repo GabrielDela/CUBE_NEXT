@@ -5,8 +5,15 @@ import Layout from '../layouts/Layout'
 import styles from '../styles/Home.module.css'
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import Relation from '../components/relation';
+import {useEffect } from "react";
 
 export default function relations() {
+  
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    me(token);
+  }, []);
+
   return (
     <Layout>
       <div className='flex flex-col mx-auto max-w-3xl'>
