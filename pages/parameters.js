@@ -3,11 +3,11 @@ import Layout from '../layouts/Layout'
 import styles from '../styles/Home.module.css'
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import { Link } from '@mui/material';
-import {useEffect } from "react";
+import { useEffect } from "react";
 import { me } from '../utils/auth.service.js';
 
 export default function parameters() {
-    
+
     useEffect(() => {
         const token = window.localStorage.getItem('token');
         me(token);
@@ -22,23 +22,37 @@ export default function parameters() {
                     </div>
                     <div>
                         <div className='mb-7'>
+                            <p className='text-xl font-semibold mb-4'>Informations utilisateurs</p>
                             <div className='sm:flex justify-between'>
-                                <input className="appearance-none border border-black rounded-full w-full md:w-2/5 sm:mx-5 py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" placeholder="Nom" />
-                                <input className="appearance-none border border-black rounded-full w-full md:w-2/5 sm:mx-5 py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="firstname" type="text" placeholder="Prénom" />
+                                <div className="flex justify-between mb-4 border-b border-purple-cube py-2">
+                                    <input className="appearance-none bg-transparent border-none w-full text-gray-700 px-4 focus:outline-none" type="text" placeholder="Nom" />
+                                </div>
+                                <div className="flex justify-between mb-4 border-b border-purple-cube py-2">
+                                    <input className="appearance-none bg-transparent border-none w-full text-gray-700 px-4 focus:outline-none" type="text" placeholder="Prénom" />
+                                </div>
                             </div>
-                            <div >
-                                <Link href="/" className='flex'>
-                                    <div className='bg-purple-cube md:ml-auto px-6 py-2 md:mx-5 inline-block rounded-full text-white font-medium hover:opacity-75 cursor-pointer shadow-xl'>Changer de pseudo</div>
-                                </Link>
+                            <div className="flex justify-between mb-4 border-b border-purple-cube py-2">
+                                <input className="appearance-none bg-transparent border-none w-full text-gray-700 px-4 focus:outline-none" type="text" placeholder="Biographie" />
+                            </div>
+                            <div className='py-6'>
+                                <div className='bg-purple-cube md:ml-auto px-6 py-2 md:mx-5 inline-block rounded-full text-white font-medium hover:opacity-75 cursor-pointer shadow-xl'>Valider les modifiactions</div>
                             </div>
                         </div>
                         <div>
-                            <input className="shadow appearance-none border border-red-500 rounded-full w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="old password" />
-                            <input className="shadow appearance-none border border-red-500 rounded-full w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="new password" />
-                            <input className="shadow appearance-none border border-red-500 rounded-full w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="repeat new password" />
-                            <Link href="/" className='flex'>
-                                <div className='bg-purple-cube ml-5 px-6 py-2 rounded-full text-white font-medium hover:opacity-75 cursor-pointer shadow-xl'>Changer de mot de passe</div>
-                            </Link>
+                            <p className='text-xl font-semibold mb-4'>Gestion de mot de passe</p>
+                            
+                                <div className="flex justify-between mb-4 border-b border-purple-cube py-2">
+                                    <input className="appearance-none bg-transparent border-none w-full text-gray-700 px-4 focus:outline-none" type="password" placeholder="Ancien MDP" />
+                                </div>
+                                <div className="flex justify-between mb-4 border-b border-purple-cube py-2">
+                                    <input className="appearance-none bg-transparent border-none w-full text-gray-700 px-4 focus:outline-none" type="password" placeholder="Nouveau MDP" />
+                                </div>
+                                <div className="flex justify-between mb-4 border-b border-purple-cube py-2">
+                                    <input className="appearance-none bg-transparent border-none w-full text-gray-700 px-4 focus:outline-none" type="password" placeholder="Comfirmation MDP" />
+                                </div>
+                            <div className="flex py-6">
+                                <div className='bg-purple-cube px-6 py-2 rounded-full text-white font-medium hover:opacity-75 cursor-pointer shadow-xl'>Changer de mot de passe</div>
+                            </div>
                         </div>
                     </div>
                     <div className='flex flex-col mb-16'>

@@ -15,7 +15,7 @@ export default function profile({userId}) {
     //a faire dans un getServerSideProps
     useEffect(async () => {
         const token = window.localStorage.getItem('token');
-        me(token);
+        let Me = await me(token);
 
         let user = null;
         if (typeof window !== 'undefined') {
@@ -72,7 +72,7 @@ export default function profile({userId}) {
                 resources.map((resource) => {
                     console.log(resource);  
                     return (
-                        <Card key={resource._id} resource={resource} />
+                        <Card key={resource._id} data={resource} />
                     )
                 })
             }

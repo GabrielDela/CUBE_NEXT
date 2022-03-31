@@ -5,9 +5,9 @@ import { isAuth, auth, me } from '../utils/auth.service.js';
 
 export default function register() {
   
-  useEffect(() => {
-    const token = window.localStorage.getItem('token');
-    me(token);
+  useEffect(async () => {
+    // const token = window.localStorage.getItem('token');
+    // await me(token);
   }, []);
 
   return (
@@ -26,11 +26,11 @@ export default function register() {
                 <input type="checkbox" className="mr-5"/>
                 J'accepte les termes du contrat d'utilisation.
             </label>
-          <Link href={"/"}>
+          {/* <Link href={"/"}> */}
             <div className=" py-3 my-4 bg-white font-bold rounded-full hover:bg-gray-100 cursor-pointer transition">
               <p className={"m-auto text-center w-full "}>Inscription</p>
             </div>
-          </Link>
+          {/* </Link> */}
           
         </div>
       </div>

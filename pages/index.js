@@ -10,9 +10,9 @@ import { getAllResources } from '../utils/resource.service';
 export default function Home({ resourcesData }) {
   let [user , setUser] = useState(null);
 
-  useEffect(() => {
+  useEffect(async () => {
     const token = window.localStorage.getItem('token');
-    me(token);
+    await me(token);
 
     let user = null;
     if (typeof window !== 'undefined') {

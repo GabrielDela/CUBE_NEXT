@@ -5,7 +5,7 @@ import URL from "./url.js"
 const BASE_URL = URL;
 
 function isAuth(token) {
-  if (window.location.pathname === "/login" && window.location.pathname === "/register" && token) {
+  if (window.location.pathname === "/login" && token) {
     Router.push("/");
   }
   if (!token) {
@@ -72,13 +72,14 @@ async function me(token) {
   
     window.localStorage.removeItem('user');
     window.localStorage.setItem('user', JSON.stringify(user.data));
-  
-    if (!response.data.success) {
-      logout();
-      isAuth();
-    }
   }
- 
+
+  console.log(response.data)
+
+  if (response.data.success == false) {
+    // logout();
+    await isAuth();
+  }
 
   return response;
 }

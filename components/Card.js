@@ -25,21 +25,23 @@ export default function Card({ data }) {
             setUser(user);
 
             console.log("user", user);
-            
+
             let count = await getNbComments(data._id);
             setNbComment(count);
 
             let me = null;
             if (typeof window !== 'undefined') {
                 me = JSON.parse(window.localStorage.getItem("user"));
-                me = await getUser(me._id);
-                setMe(me);
+                if (me != null) {
+                    me = await getUser(me._id);
+                    setMe(me);
 
-                let favorites = me != null ? me.favorites : [];
+                    let favorites = me != null ? me.favorites : [];
 
-                let temp = favorites.find(favorite => favorite == data._id);
-                if (temp != null) {
-                    setIsFavorite(true);
+                    let temp = favorites.find(favorite => favorite == data._id);
+                    if (temp != null) {
+                        setIsFavorite(true);
+                    }
                 }
             }
         }

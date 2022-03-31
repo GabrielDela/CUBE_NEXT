@@ -7,9 +7,9 @@ export default function login() {
   var [email, setEmail] = react.useState("");
   var [password, setPassword] = react.useState("");
 
-  useEffect(() => {
+  useEffect(async () => {
     const token = window.localStorage.getItem('token');
-    me(token);
+    await me(token);
   }, []);
 
   return (
