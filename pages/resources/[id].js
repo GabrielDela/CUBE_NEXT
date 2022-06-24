@@ -11,7 +11,7 @@ import { me } from '../../utils/auth.service';
 import URL from '../../utils/url.js';
 const BASE_URL = URL;
 
-export default function resource({ resource, user }) {
+export default function Resource({ resource, user }) {
 
     let date = resource != null ? new Date(resource.created_at) : new Date();
     var formatedDay = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
@@ -21,7 +21,7 @@ export default function resource({ resource, user }) {
     useEffect(() => {
         const token = window.localStorage.getItem('token');
         me(token);
-        
+
         createElementFromHTML(resource.content);
     });
 

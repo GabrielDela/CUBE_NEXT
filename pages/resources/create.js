@@ -7,18 +7,22 @@ import axios from "axios";
 // KeyboardArrowDownIcon
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { me } from "../../utils/auth.service";
+import { getAllTypes } from "../../utils/type.service";
+import { getAllCategories } from "../../utils/categories.service";
 
 var tempImage = [];
 
-export default function create(props) {
+export default function Create() {
     let [title, setTitle] = useState("");
     let [description, setDescription] = useState("");
     let [formData, setFormData] = useState(null);
 
-    let [categories, setCategories] = useState(props.categories);
     let [category, setCategory] = useState("");
     let [type, setType] = useState("");
-    let [types, setTypes] = useState(props.types);
+
+
+    let [categories, setCategories] = useState(getAllCategories());
+    let [types, setTypes] = useState(getAllTypes());
 
     let user = null;
     if (typeof window !== 'undefined') {
@@ -136,7 +140,7 @@ export default function create(props) {
         <Layout>
             <div className='flex flex-col mx-auto max-w-3xl'>
                 <div className='text-xl font-semibold tracking-widest py-8 px-4'>
-                    Création d'une ressource
+                    Création d&apos;une ressource
                 </div>
                 <div className="flex justify-between mb-4 border-b border-purple-cube py-2">
                     <input value={title} onChange={(value) => {
@@ -186,14 +190,14 @@ export default function create(props) {
     );
 }
 
-export async function getStaticProps() {
-    const categories = await axios.get('http://localhost:5000/api/categories');
-    const types = await axios.get('http://localhost:5000/api/types');
+// export async function getStaticProps() {
+//     const categories = await axios.get('http://localhost:5000/api/categories');
+//     const types = await axios.get('http://localhost:5000/api/types');
 
-    return {
-        props: {
-            categories: categories.data,
-            types: types.data,
-        }
-    }
-}
+//     return {
+//         props: {
+//             categories: categories.data,
+//             types: types.data,
+//         }
+//     }
+// }

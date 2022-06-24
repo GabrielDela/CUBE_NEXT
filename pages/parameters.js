@@ -6,7 +6,7 @@ import { Link } from '@mui/material';
 import { useEffect } from "react";
 import { me } from '../utils/auth.service.js';
 
-export default function parameters() {
+export default function Parameters() {
 
     useEffect(() => {
         const token = window.localStorage.getItem('token');

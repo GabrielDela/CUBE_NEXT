@@ -8,7 +8,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import Card from '../components/Card'
 
 
-export default function profile() {
+export default function Profile() {
     let [resources, setResources] = useState([])
     let [user, setUser] = useState(null)
     // let user = null;
@@ -16,7 +16,7 @@ export default function profile() {
     //     user = JSON.parse(window.localStorage.getItem("user"));
     // }
 
-    useEffect(async () => {
+    useEffect(() => {
         const token = window.localStorage.getItem('token');
         me(token);
 
@@ -26,8 +26,10 @@ export default function profile() {
         }
         setUser(user);
 
-        var response = await axios.get('http://localhost:5000/api/resources/user/' + user._id);
-        setResources(response.data)
+        axios.get('http://localhost:5000/api/resources/user/' + user._id).then((x) => {
+            setResources(x.data)
+        });
+        
     }, []);
     
     return (

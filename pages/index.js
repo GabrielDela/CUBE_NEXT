@@ -3,20 +3,20 @@ import Image from 'next/image';
 import Card from '../components/Card';
 import Layout from '../layouts/Layout';
 import axios from 'axios';
-import { isAuth, auth, logout, me } from '../utils/auth.service.js';
-import { useEffect, useReducer, createContext, useContext, useMemo, useState } from "react";
+import { me } from '../utils/auth.service.js';
+import { useEffect, useState } from "react";
 import { getAllResources } from '../utils/resource.service';
 
 export default function Home({ resourcesData }) {
   let [user , setUser] = useState(null);
 
-  useEffect(async () => {
+  useEffect(() => {
     const token = window.localStorage.getItem('token');
-    await me(token);
+    me(token);
 
-    let user = null;
+    let _user = null;
     if (typeof window !== 'undefined') {
-      user = JSON.parse(window.localStorage.getItem("user"));
+      _user = JSON.parse(window.localStorage.getItem("user"));
     }
     setUser(user);
   }, []);

@@ -3,13 +3,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { isAuth, auth, me } from '../utils/auth.service.js';
 
-export default function login() {
+export default function Login() {
   var [email, setEmail] = react.useState("");
   var [password, setPassword] = react.useState("");
 
-  useEffect(async () => {
+  useEffect(() => {
     const token = window.localStorage.getItem('token');
-    await me(token);
+    me(token);
   }, []);
 
   return (
@@ -43,7 +43,7 @@ export default function login() {
         </div>
         <div>
           <Link href={"/register"}>
-            <p className="w-fit mx-10 text-white cursor-pointer hover:underline hover:text-grey transition">Vous n'avez pas de compte ?</p>
+            <p className="w-fit mx-10 text-white cursor-pointer hover:underline hover:text-grey transition">Vous n&apos;avez pas de compte ?</p>
           </Link>
         </div>
       </div>

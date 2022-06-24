@@ -8,22 +8,22 @@ import axios from "axios";
 import Card from '../../components/Card'
 
 
-export default function profile({userId}) {
+export default function Profile({userId}) {
     let [resources, setResources] = useState([]);
     let [userData, setUserData] = useState(null);
 
     //a faire dans un getServerSideProps
-    useEffect(async () => {
+    useEffect(() => {
         const token = window.localStorage.getItem('token');
-        let Me = await me(token);
+        me(token);
 
         let user = null;
         if (typeof window !== 'undefined') {
-            user = await getUser(userId)
+            user = getUser(userId)
         }
         setUserData(user);
 
-        var response = await getUserResources(user._id);
+        var response = getUserResources(user._id);
         setResources(response);
     }, []);
 

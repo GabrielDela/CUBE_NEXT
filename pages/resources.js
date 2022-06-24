@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { me } from '../utils/auth.service.js';
 
-export default function resources() {
+export default function Resources() {
 
     let [resources, setResources] = useState([])
     // let user = null;
@@ -14,7 +14,7 @@ export default function resources() {
     //     user = JSON.parse(window.localStorage.getItem("user"));
     // }
 
-    useEffect(async () => {
+    useEffect(() => {
         const token = window.localStorage.getItem('token');
         me(token);
 
@@ -23,8 +23,11 @@ export default function resources() {
             user = JSON.parse(window.localStorage.getItem("user"));
         }
 
-        var response = await axios.get('http://localhost:5000/api/resources/user/' + user._id);
-        setResources(response.data)
+        axios.get('http://localhost:5000/api/resources/user/' + user._id).then((x) => {
+            setResources(x.data)
+        });
+        
+
     }, []);
 
     return (
@@ -40,7 +43,6 @@ export default function resources() {
                         </Link>
                     </div>
                 </div>
-
                 {
                     resources.map((resource) => {
                         return (

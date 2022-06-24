@@ -2,23 +2,22 @@
 import Image from 'next/image'
 import Card from '../components/Card'
 import Layout from '../layouts/Layout'
-import styles from '../styles/Home.module.css'
-import { getResource, getResourceList } from '../utils/resource.service';
+import { getResourceList } from '../utils/resource.service';
 import {useEffect, useState } from "react";
 import { me } from '../utils/auth.service';
 
-export default function favorites() {
+export default function Favorites() {
     let user = {};
     let [listFavorites, setListFavorites] = useState([]);
     
-    useEffect(async () => {
+    useEffect(() => {
         const token = window.localStorage.getItem('token');
-        await me(token);
+        me(token);
 
         if (typeof window !== 'undefined') {
             user = JSON.parse(window.localStorage.getItem("user"));
             if (user.favorites != null) {
-                let response = await getResourceList(user.favorites);
+                let response = getResourceList(user.favorites);
                 setListFavorites(response);
             }
         }

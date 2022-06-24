@@ -1,9 +1,7 @@
 import react from "react"
 import Link from "next/link"
 import { useEffect } from "react";
-import { isAuth, auth, me } from '../utils/auth.service.js';
-
-export default function register() {
+export default function Register() {
   
   useEffect(async () => {
     // const token = window.localStorage.getItem('token');
@@ -24,7 +22,7 @@ export default function register() {
             <input className="py-6 mb-4 px-2 text-white h-10 bg-transparent rounded-md border border-2 border-gray-200" type={"text"} placeholder="Mot de passe"/>
             <label className="text-white ml-4 w-fit">
                 <input type="checkbox" className="mr-5"/>
-                J'accepte les termes du contrat d'utilisation.
+                J&apos;accepte les termes du contrat d&apos;utilisation.
             </label>
           {/* <Link href={"/"}> */}
             <div className=" py-3 my-4 bg-white font-bold rounded-full hover:bg-gray-100 cursor-pointer transition">

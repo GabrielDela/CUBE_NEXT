@@ -9,18 +9,20 @@ import { useEffect, useState } from "react";
 import { me } from '../utils/auth.service';
 import axios from 'axios';
 
-export default function relations() {
+export default function Relations() {
   let [relations, setRelations] = useState([]);
 
-  useEffect(async () => {
+  useEffect(() => {
     const token = window.localStorage.getItem('token');
-    let data = await me(token);
+    let data = me(token);
 
     if (data.data) {
       let user_id = data.data.user.user._id;
 
-      let response = await axios.get('http://localhost:5000/api/relations/friends/' + user_id);
-      setRelations(response.data);
+      axios.get('http://localhost:5000/api/relations/friends/' + user_id).then((x) => {
+        setRelations(x.data);
+      });
+     
     }
   }, []);
 
@@ -29,7 +31,7 @@ export default function relations() {
       <div className='flex flex-col mx-auto max-w-3xl'>
         <div className='flex justify-between p-5'>
           <div className='text-xl font-semibold tracking-widest my-auto'>
-            Liste d'amis
+            Liste d&apos;amis
           </div>
           <Image src="/img/logo.png" width='50px' height='50px'></Image>
         </div>
